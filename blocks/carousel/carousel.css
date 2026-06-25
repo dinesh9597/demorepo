@@ -14,15 +14,32 @@
   box-sizing: border-box;
 }
 
-.carousel .carousel-slide > * {
-  margin: 0;
+/* ── Image styles ── */
+.carousel .carousel-slide .carousel-slide-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel .carousel-slide .carousel-slide-body {
+  padding: 1.5rem;
+}
+
+.carousel .carousel-slide .carousel-slide-body > *:first-child {
+  margin-top: 0;
+}
+
+/* If no image — add padding directly on slide */
+.carousel .carousel-slide.no-image {
+  padding: 1.5rem;
 }
 
 /* Prev / Next buttons */
 .carousel .carousel-prev,
 .carousel .carousel-next {
   position: absolute;
-  top: 50%;
+  top: 160px;
   transform: translateY(-50%);
   z-index: 2;
   display: flex;
@@ -31,20 +48,17 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid var(--color-border-primary, #ccc);
-  background: var(--background-color, #fff);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.85);
   cursor: pointer;
   font-size: 1.25rem;
-  line-height: 1;
-  color: var(--text-color, currentcolor);
-  opacity: 0.85;
-  transition: opacity 0.2s, background 0.2s;
+  color: #333;
+  transition: background 0.2s;
 }
 
 .carousel .carousel-prev:hover,
 .carousel .carousel-next:hover {
-  opacity: 1;
-  background: var(--highlight-background-color, #f0f0f0);
+  background: #fff;
 }
 
 .carousel .carousel-prev {
@@ -60,7 +74,7 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  padding: 0.75rem 0 0;
+  padding: 0.75rem 0;
 }
 
 .carousel .carousel-dots button {
@@ -79,9 +93,17 @@
   transform: scale(1.35);
 }
 
-/* Hide buttons when only one slide */
-.carousel[data-slides="1"] .carousel-prev,
-.carousel[data-slides="1"] .carousel-next,
-.carousel[data-slides="1"] .carousel-dots {
-  display: none;
+/* Responsive — shorter image on mobile */
+@media (max-width: 600px) {
+  .carousel .carousel-slide .carousel-slide-image {
+    height: 200px;
+  }
+
+  .carousel .carousel-prev,
+  .carousel .carousel-next {
+    top: 100px;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
 }
