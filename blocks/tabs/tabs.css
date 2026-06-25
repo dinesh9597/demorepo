@@ -1,1 +1,81 @@
+.tabs {
+  border: 1px solid var(--color-border-primary, #e0e0e0);
+  border-radius: 8px;
+  overflow: hidden;
+}
 
+/* ── Tab navigation bar ── */
+.tabs .tabs-nav {
+  display: flex;
+  background: var(--light-color, #f8f8f8);
+  border-bottom: 1px solid var(--color-border-primary, #e0e0e0);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs .tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs .tabs-nav button {
+  padding: 12px 24px;
+  font-size: var(--body-font-size-s, 0.9rem);
+  font-weight: 500;
+  color: var(--color-text-tertiary, #888);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tabs .tabs-nav button:hover {
+  color: var(--text-color, #000);
+}
+
+.tabs .tabs-nav button[aria-selected='true'] {
+  color: var(--text-color, #000);
+  border-bottom-color: var(--link-color, #0969da);
+}
+
+/* ── Tab panels ── */
+.tabs .tabs-panels {
+  padding: 1.5rem;
+  background: var(--background-color, #fff);
+}
+
+.tabs .tabs-panel {
+  display: none;
+  animation: tabs-fade 0.2s ease;
+}
+
+.tabs .tabs-panel[aria-hidden='false'] {
+  display: block;
+}
+
+@keyframes tabs-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Content inside panels ── */
+.tabs .tabs-panel > *:first-child {
+  margin-top: 0;
+}
+
+.tabs .tabs-panel > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .tabs .tabs-nav button {
+    padding: 10px 16px;
+    font-size: var(--body-font-size-xs, 0.8rem);
+  }
+
+  .tabs .tabs-panels {
+    padding: 1rem;
+  }
+}
