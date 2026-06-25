@@ -1,6 +1,6 @@
 let current = 0;
 let autoPlayTimer = null;
-const AUTO_PLAY_DELAY = 2000; // 3 seconds — change this to adjust speed
+const AUTO_PLAY_DELAY = 3000;
 
 function buildDots(block, total) {
   const dots = document.createElement('div');
@@ -29,17 +29,19 @@ function updateDots(block, index) {
 function goTo(block, index) {
   const track = block.querySelector('.carousel-track');
   const slides = block.querySelectorAll('.carousel-slide');
-  current = (index + slides.length) % slides.length;
+  current = (index + slides.length) % slides.length; // ← this handles loop back to slide 1
   track.style.transform = `translateX(-${current * 100}%)`;
   updateDots(block, current);
 }
 
+// ↓↓↓ PASTE TARGET — this is the startAutoPlay function ↓↓↓
 function startAutoPlay(block) {
   const slides = block.querySelectorAll('.carousel-slide');
   autoPlayTimer = setInterval(() => {
-    goTo(block, current + 1);
+    goTo(block, current + 1); // ← current + 1 moves to next, loops back via goTo
   }, AUTO_PLAY_DELAY);
 }
+// ↑↑↑ END OF startAutoPlay ↑↑↑
 
 function stopAutoPlay() {
   if (autoPlayTimer) {
@@ -61,7 +63,7 @@ function buildNav(block) {
     btn.textContent = dir === 'prev' ? '‹' : '›';
     btn.addEventListener('click', () => {
       goTo(block, current + (dir === 'prev' ? -1 : 1));
-      resetAutoPlay(block); // reset timer when user clicks manually
+      resetAutoPlay(block);
     });
     block.appendChild(btn);
   });
@@ -108,14 +110,11 @@ export default function decorate(block) {
     buildNav(block);
     buildDots(block, total);
 
-    // Start auto-play
-    startAutoPlay(block);
+    startAutoPlay(block); // ← starts auto-play on page load
 
-    // Pause on hover
     block.addEventListener('mouseenter', stopAutoPlay);
     block.addEventListener('mouseleave', () => startAutoPlay(block));
 
-    // Touch swipe — reset timer after swipe
     let startX = 0;
     track.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
@@ -128,7 +127,6 @@ export default function decorate(block) {
       startAutoPlay(block);
     });
 
-    // Keyboard
     block.setAttribute('tabindex', '0');
     block.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') { goTo(block, current - 1); resetAutoPlay(block); }
