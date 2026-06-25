@@ -1,1 +1,102 @@
+.table {
+  overflow-x: auto;
+}
 
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--body-font-size-s, 0.875rem);
+  border: 1px solid var(--color-border-primary, #e0e0e0);
+}
+
+/* Header row */
+.table thead tr {
+  background-color: var(--color-brand-primary, #0969da);
+}
+
+.table thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+}
+
+.table thead th:last-child {
+  border-right: none;
+}
+
+/* Body rows */
+.table tbody tr {
+  border-bottom: 1px solid var(--color-border-primary, #e0e0e0);
+  transition: background-color 0.15s ease;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background-color: var(--highlight-background-color, #f5f5f5);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--light-color, #f8f8f8);
+}
+
+.table tbody tr:nth-child(even):hover {
+  background-color: var(--highlight-background-color, #f0f0f0);
+}
+
+.table tbody td {
+  padding: 10px 16px;
+  color: var(--text-color, #333);
+  border-right: 1px solid var(--color-border-primary, #e0e0e0);
+  vertical-align: top;
+}
+
+.table tbody td:last-child {
+  border-right: none;
+}
+
+/* First column bold */
+.table tbody td:first-child {
+  font-weight: 600;
+  color: var(--heading-color, #000);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .table thead {
+    display: none;
+  }
+
+  .table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-border-primary, #e0e0e0);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .table tbody td {
+    display: flex;
+    justify-content: space-between;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-primary, #e0e0e0);
+    padding: 8px 12px;
+  }
+
+  .table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--heading-color, #000);
+    margin-right: 1rem;
+    white-space: nowrap;
+  }
+}
