@@ -12,7 +12,7 @@
 /* ── Tab navigation bar ── */
 .tabs .tabs-nav {
   display: flex;
-  background: var(--light-color, #f8f8f8);
+  background: var(--light-color, #bf94da);
   border-bottom: 1px solid var(--color-border-primary, #e0e0e0);
   overflow-x: auto;
   scrollbar-width: none;
