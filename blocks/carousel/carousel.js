@@ -1,6 +1,6 @@
 let current = 0;
 let autoPlayTimer = null;
-const AUTO_PLAY_DELAY = 3000; // 3 seconds — change this to adjust speed
+const AUTO_PLAY_DELAY = 2000; // 3 seconds — change this to adjust speed
 
 function buildDots(block, total) {
   const dots = document.createElement('div');
