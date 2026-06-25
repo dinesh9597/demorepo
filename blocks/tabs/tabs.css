@@ -2,6 +2,10 @@
   border: 1px solid var(--color-border-primary, #e0e0e0);
   border-radius: 8px;
   overflow: hidden;
+    
+}
+
+.tabs-wrapper{
     padding-top:70px;
 }
 
