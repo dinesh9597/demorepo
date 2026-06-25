@@ -20,6 +20,7 @@
   height: 320px;
   object-fit: cover;
   display: block;
+    padding:70px;
 }
 
 .carousel .carousel-slide .carousel-slide-body {
