@@ -41,12 +41,40 @@ function buildNav(block) {
 }
 
 export default function decorate(block) {
-  // Wrap all rows in a track
   const track = document.createElement('div');
   track.classList.add('carousel-track');
 
   [...block.children].forEach((row) => {
     row.classList.add('carousel-slide');
+
+    // Check if slide has an image
+    const img = row.querySelector('img');
+
+    if (img) {
+      // Pull image out, apply class, put it first
+      img.classList.add('carousel-slide-image');
+
+      // Wrap remaining content in a body div
+      const body = document.createElement('div');
+      body.classList.add('carousel-slide-body');
+
+      // Move all non-image content into body
+      [...row.children].forEach((child) => {
+        // picture element wraps the img — move the whole picture tag
+        if (!child.querySelector('img') && child.tagName !== 'PICTURE') {
+          body.appendChild(child);
+        }
+      });
+
+      // Clear slide, add picture then body
+      const picture = row.querySelector('picture') || img;
+      row.textContent = '';
+      row.appendChild(picture);
+      row.appendChild(body);
+    } else {
+      row.classList.add('no-image');
+    }
+
     track.appendChild(row);
   });
 
@@ -59,7 +87,7 @@ export default function decorate(block) {
     buildNav(block);
     buildDots(block, total);
 
-    // Touch / swipe support
+    // Touch swipe
     let startX = 0;
     track.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
@@ -70,7 +98,7 @@ export default function decorate(block) {
       if (Math.abs(diff) > 40) goTo(block, current + (diff > 0 ? 1 : -1));
     });
 
-    // Keyboard support
+    // Keyboard
     block.setAttribute('tabindex', '0');
     block.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') goTo(block, current - 1);
