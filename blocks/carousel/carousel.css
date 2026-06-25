@@ -1,6 +1,7 @@
 .carousel {
   position: relative;
   overflow: hidden;
+    background-color:lavender;
 }
 
 .curousel-wrapper{
