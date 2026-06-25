@@ -33,6 +33,7 @@
 /* If no image — add padding directly on slide */
 .carousel .carousel-slide.no-image {
   padding: 1.5rem;
+    backgroung-color:lavender;
 }
 
 /* Prev / Next buttons */
