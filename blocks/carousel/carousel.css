@@ -3,6 +3,9 @@
   overflow: hidden;
 }
 
+.curousel-wrapper{
+    background-color:levendor;
+}
 .carousel .carousel-track {
   display: flex;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
