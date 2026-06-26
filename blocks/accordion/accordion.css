@@ -1,6 +1,7 @@
 .accordion {
   display: grid;
   gap: 12px;
+    background-color:yellow;
 }
 
 .accordion-item {
