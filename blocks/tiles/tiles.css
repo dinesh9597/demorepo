@@ -1,1 +1,103 @@
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
 
+/* Single tile */
+.tiles .tile {
+  background: var(--background-color, #fff);
+  border: 1px solid var(--color-border-primary, #e0e0e0);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.tiles .tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Image */
+.tiles .tile .tile-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* No image fallback */
+.tiles .tile.no-image .tile-body {
+  padding-top: 1.5rem;
+}
+
+/* Body */
+.tiles .tile .tile-body {
+  padding: 1rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tiles .tile .tile-body > *:first-child {
+  margin-top: 0;
+}
+
+/* Title — first heading inside tile */
+.tiles .tile .tile-body h2,
+.tiles .tile .tile-body h3 {
+  font-size: var(--body-font-size-l, 1rem);
+  font-weight: 600;
+  color: var(--heading-color, #000);
+  margin: 0 0 0.5rem;
+}
+
+/* Description text */
+.tiles .tile .tile-body p {
+  font-size: var(--body-font-size-s, 0.875rem);
+  color: var(--text-color, #333);
+  line-height: 1.6;
+  margin: 0 0 0.75rem;
+  flex: 1;
+}
+
+/* Link — pushed to bottom */
+.tiles .tile .tile-body a {
+  font-size: var(--body-font-size-s, 0.875rem);
+  font-weight: 500;
+  color: var(--link-color, #0969da);
+  text-decoration: none;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tiles .tile .tile-body a::after {
+  content: '→';
+  transition: transform 0.2s ease;
+}
+
+.tiles .tile .tile-body a:hover::after {
+  transform: translateX(4px);
+}
+
+/* Responsive — 2 cols on tablet */
+@media (max-width: 900px) {
+  .tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsive — 1 col on mobile */
+@media (max-width: 540px) {
+  .tiles {
+    grid-template-columns: 1fr;
+  }
+
+  .tiles .tile .tile-image {
+    height: 140px;
+  }
+}
