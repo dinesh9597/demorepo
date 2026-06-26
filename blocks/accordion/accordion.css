@@ -42,7 +42,7 @@
   padding: 0 16px 16px 16px;
   overflow: hidden;
   transition: max-height .28s ease;
-    backgorund-color:yellow;
+    background-color:yellow;
 }
 
 .accordion-panel[hidden] { display: block; }
