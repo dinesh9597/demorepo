@@ -1,7 +1,6 @@
 .accordion {
   display: grid;
   gap: 12px;
-    background-color:yellow;
 }
 
 .accordion-item {
@@ -43,6 +42,7 @@
   padding: 0 16px 16px 16px;
   overflow: hidden;
   transition: max-height .28s ease;
+    backgorund-color:yellow;
 }
 
 .accordion-panel[hidden] { display: block; }
