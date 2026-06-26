@@ -23,6 +23,8 @@
 }
 
 .tabs .tabs-nav button {
+    flex: 1;           /* ← each button takes equal width */
+  text-align: center;
   padding: 12px 24px;
   font-size: var(--body-font-size-s, 0.9rem);
   font-weight: 500;
