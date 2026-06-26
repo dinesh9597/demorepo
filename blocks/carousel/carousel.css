@@ -1,11 +1,8 @@
 .carousel {
   position: relative;
   overflow: hidden;
-
-}
-
-.curousel-wrapper{
-    background-color:lavender;
+ background-color:lavender;
+    margin-top:40px;
 }
 .carousel .carousel-track {
   display: flex;
