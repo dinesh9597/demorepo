@@ -1,31 +1,29 @@
 export default async function decorate(block) {
-  // ── Get the sheet URL from the block content ──
-  // Author puts the sheet path in the block table in da.live
-  // e.g.  /your-sheet-name.json  or  /cars.json
-  const link = block.querySelector('a');
-  const sheetUrl = link ? link.href : '/cars.json';
 
-  // Show loading state
-  block.innerHTML = '<div class="cars-loading">Loading...</div>';
+  // ── Sheet URL — hardcoded to your carmodel sheet ──
+  const sheetUrl = '/carmodel.json';
+
+  // Show loading
+  block.innerHTML = '<div class="carmodel-loading">Loading...</div>';
 
   try {
-    // ── AJAX call to fetch EDS sheet JSON ──
+    // ── AJAX call ──
     const response = await fetch(sheetUrl);
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch: ${response.status}`);
+      throw new Error(`Failed to fetch data: ${response.status}`);
     }
 
     const json = await response.json();
     const data = json.data;
 
     if (!data || data.length === 0) {
-      block.innerHTML = '<div class="cars-error">No data found.</div>';
+      block.innerHTML = '<div class="carmodel-error">No data found.</div>';
       return;
     }
 
     // ── Get column headers from first row keys ──
-    const headers = Object.keys(data[0]);
+    const headers = Object.keys(data[0]).map((h) => h.trim());
 
     // ── Build table ──
     const table = document.createElement('table');
@@ -36,7 +34,7 @@ export default async function decorate(block) {
 
     headers.forEach((header) => {
       const th = document.createElement('th');
-      th.textContent = header.trim(); // trim spaces from key names
+      th.textContent = header;
       headerRow.appendChild(th);
     });
 
@@ -49,9 +47,10 @@ export default async function decorate(block) {
     data.forEach((row) => {
       const tr = document.createElement('tr');
 
-      headers.forEach((header) => {
+      // Use original keys (with spaces) to read values
+      Object.keys(row).forEach((key) => {
         const td = document.createElement('td');
-        td.textContent = row[header] ? row[header].trim() : '—';
+        td.textContent = row[key] ? row[key].trim() : '—';
         tr.appendChild(td);
       });
 
@@ -65,6 +64,6 @@ export default async function decorate(block) {
     block.appendChild(table);
 
   } catch (error) {
-    block.innerHTML = `<div class="cars-error">Error loading data: ${error.message}</div>`;
+    block.innerHTML = `<div class="carmodel-error">Error: ${error.message}</div>`;
   }
 }
