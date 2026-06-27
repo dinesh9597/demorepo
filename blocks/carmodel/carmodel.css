@@ -1,1 +1,78 @@
+.cars {
+  overflow-x: auto;
+}
 
+.cars table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--body-font-size-s, 0.875rem);
+  border: 1px solid var(--color-border-primary, #e0e0e0);
+}
+
+.cars thead tr {
+  background-color: #059669;
+}
+
+.cars thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  text-transform: capitalize;
+}
+
+.cars thead th:last-child {
+  border-right: none;
+}
+
+.cars tbody tr {
+  border-bottom: 1px solid var(--color-border-primary, #e0e0e0);
+  transition: background-color 0.15s ease;
+}
+
+.cars tbody tr:last-child {
+  border-bottom: none;
+}
+
+.cars tbody tr:hover {
+  background-color: #ecfdf5;
+}
+
+.cars tbody tr:nth-child(even) {
+  background-color: #f0fdf4;
+}
+
+.cars tbody td {
+  padding: 10px 16px;
+  color: var(--text-color, #333);
+  border-right: 1px solid var(--color-border-primary, #e0e0e0);
+  text-transform: capitalize;
+}
+
+.cars tbody td:last-child {
+  border-right: none;
+}
+
+.cars tbody td:first-child {
+  font-weight: 600;
+  color: var(--heading-color, #000);
+}
+
+/* Loading state */
+.cars .cars-loading {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-text-secondary, #888);
+  font-size: 0.875rem;
+}
+
+/* Error state */
+.cars .cars-error {
+  padding: 1rem;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #991b1b;
+  font-size: 0.875rem;
+}
