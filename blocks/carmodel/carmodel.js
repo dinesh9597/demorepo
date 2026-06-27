@@ -3,7 +3,7 @@ export default async function decorate(block) {
   // Author puts the sheet path in the block table in da.live
   // e.g.  /your-sheet-name.json  or  /cars.json
   const link = block.querySelector('a');
-  const sheetUrl = link ? link.href : '/carmodel.json';
+  const sheetUrl = link ? link.href : '/cars.json';
 
   // Show loading state
   block.innerHTML = '<div class="cars-loading">Loading...</div>';
