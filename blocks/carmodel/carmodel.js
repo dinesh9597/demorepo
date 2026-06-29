@@ -27,7 +27,7 @@ export default async function decorate(block) {
 
     const loadMoreBtn = document.createElement('button');
     loadMoreBtn.className = 'carmodel-load-more';
-    loadMoreBtn.textContent = 'Load more';
+    loadMoreBtn.textContent = 'Load more..';
 
     function renderTiles() {
       const nextBatch = allData.slice(shown, shown + PAGE_SIZE);
