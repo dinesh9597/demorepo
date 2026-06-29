@@ -1,33 +1,72 @@
+.carmodel {
+  font-size: var(--body-font-size-s, 0.875rem);
+}
+
+.carmodel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
 .carmodel-tile {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 16px;
   background: #fff;
-  min-width: max-content;
-  flex-shrink: 0;
 }
 
 .carmodel-tile-row {
   display: flex;
-  flex-direction: row;
-  gap: 24px;
+  justify-content: space-between;
+  padding: 4px 0;
   font-size: 0.8rem;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.carmodel-tile-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.carmodel-tile-row:last-child {
+  border-bottom: none;
 }
 
 .carmodel-tile-label {
   color: #888;
   text-transform: capitalize;
-  font-size: 0.72rem;
 }
 
 .carmodel-tile-value {
   font-weight: 500;
   color: #111;
   text-transform: capitalize;
+}
+
+.carmodel-load-more {
+  display: block;
+  margin: 0 auto;
+  padding: 8px 24px;
+  background: #059669;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.carmodel-load-more:hover {
+  background: #047857;
+}
+
+.carmodel-loading {
+  padding: 2rem;
+  text-align: center;
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.carmodel-error {
+  padding: 1rem;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  color: #991b1b;
+  font-size: 0.875rem;
 }
