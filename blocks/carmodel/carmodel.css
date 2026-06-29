@@ -3,10 +3,12 @@
 }
 
 .carmodel-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
   gap: 16px;
   margin-bottom: 20px;
+  padding-bottom: 8px;
 }
 
 .carmodel-tile {
@@ -14,6 +16,8 @@
   border-radius: 8px;
   padding: 16px;
   background: #fff;
+  min-width: 200px;
+  flex-shrink: 0;
 }
 
 .carmodel-tile-row {
@@ -31,6 +35,7 @@
 .carmodel-tile-label {
   color: #888;
   text-transform: capitalize;
+  margin-right: 12px;
 }
 
 .carmodel-tile-value {
