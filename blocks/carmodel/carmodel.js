@@ -1,68 +1,63 @@
 export default async function decorate(block) {
-
-  // ── Sheet URL — hardcoded to your carmodel sheet ──
   const sheetUrl = '/carmodel.json';
+  const PAGE_SIZE = 4;
+  let allData = [];
+  let shown = 0;
 
-  // Show loading
   block.innerHTML = '<div class="carmodel-loading">Loading...</div>';
 
   try {
-    // ── AJAX call ──
     const response = await fetch(sheetUrl);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch data: ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`Failed to fetch data: ${response.status}`);
     const json = await response.json();
-    const data = json.data;
+    allData = json.data;
 
-    if (!data || data.length === 0) {
+    if (!allData || allData.length === 0) {
       block.innerHTML = '<div class="carmodel-error">No data found.</div>';
       return;
     }
 
-    // ── Get column headers from first row keys ──
-    const headers = Object.keys(data[0]).map((h) => h.trim());
+    const headers = Object.keys(allData[0]);
 
-    // ── Build table ──
-    const table = document.createElement('table');
+    // Build wrapper
+    const wrapper = document.createElement('div');
 
-    // thead
-    const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
+    const grid = document.createElement('div');
+    grid.className = 'carmodel-grid';
 
-    headers.forEach((header) => {
-      const th = document.createElement('th');
-      th.textContent = header;
-      headerRow.appendChild(th);
-    });
+    const loadMoreBtn = document.createElement('button');
+    loadMoreBtn.className = 'carmodel-load-more';
+    loadMoreBtn.textContent = 'Load more';
 
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-    // tbody
-    const tbody = document.createElement('tbody');
-
-    data.forEach((row) => {
-      const tr = document.createElement('tr');
-
-      // Use original keys (with spaces) to read values
-      Object.keys(row).forEach((key) => {
-        const td = document.createElement('td');
-        td.textContent = row[key] ? row[key].trim() : '—';
-        tr.appendChild(td);
+    function renderTiles() {
+      const nextBatch = allData.slice(shown, shown + PAGE_SIZE);
+      nextBatch.forEach((row) => {
+        const tile = document.createElement('div');
+        tile.className = 'carmodel-tile';
+        headers.forEach((key) => {
+          const rowEl = document.createElement('div');
+          rowEl.className = 'carmodel-tile-row';
+          rowEl.innerHTML = `
+            <span class="carmodel-tile-label">${key}</span>
+            <span class="carmodel-tile-value">${row[key] ? row[key].trim() : '—'}</span>
+          `;
+          tile.appendChild(rowEl);
+        });
+        grid.appendChild(tile);
       });
+      shown += nextBatch.length;
+      loadMoreBtn.style.display = shown >= allData.length ? 'none' : 'block';
+    }
 
-      tbody.appendChild(tr);
-    });
+    loadMoreBtn.addEventListener('click', renderTiles);
 
-    table.appendChild(tbody);
+    wrapper.appendChild(grid);
+    wrapper.appendChild(loadMoreBtn);
 
-    // ── Replace loading with table ──
     block.textContent = '';
-    block.appendChild(table);
+    block.appendChild(wrapper);
 
+    renderTiles(); // load first 4
   } catch (error) {
     block.innerHTML = `<div class="carmodel-error">Error: ${error.message}</div>`;
   }
